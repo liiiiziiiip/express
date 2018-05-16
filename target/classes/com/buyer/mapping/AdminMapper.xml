@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buyer.dao.AdminMapper" >
+    <!-- 为这个mapper指定唯一的namespace -->
+  
+  <resultMap type="String" id="Rpw">
+  	<id column="PASSWORD" property="pw" jdbcType="VARCHAR"/>
+  </resultMap>
+  
+ 
+  <select id="getPW" resultMap="Rpw" parameterType="java.lang.String">
+	select PASSWORD from ADMIN
+	where NAME = #{name,jdbcType=VARCHAR}
+  </select>
+</mapper>

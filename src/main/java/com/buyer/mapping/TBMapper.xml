@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buyer.dao.TBMapper" >
+    <!-- 为这个mapper指定唯一的namespace -->
+  <resultMap id="BaseResultMap" type="com.buyer.model.TransportBill" >
+    <id column="T_ID" property="T_id" jdbcType="VARCHAR" />
+    <result column="G_NAME" property="G_name" jdbcType="VARCHAR" />
+    <result column="TD_START" property="Td_start" jdbcType="VARCHAR" />
+    <result column="TD_END" property="Td_end" jdbcType="VARCHAR" />
+    <result column="T_PRICE" property="T_price" jdbcType="INTEGER" />
+    <result column="T_OTHER" property="T_other" jdbcType="VARCHAR" />
+    <result column="T_NOW" property="T_now" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="Order_BaseResultMap" type="com.buyer.model.Order" >
+    <id column="O_ID" property="O_id" jdbcType="VARCHAR" />
+    <result column="T_ID" property="T_id" jdbcType="VARCHAR" />
+    <result column="E_ID" property="E_id" jdbcType="VARCHAR" />
+    <result column="S_PHONE" property="S_phone" jdbcType="VARCHAR" />
+    <result column="R_PHONE" property="R_phone" jdbcType="VARCHAR" />
+    <result column="T_PRICE" property="price" jdbcType="INTEGER" />
+    <result column="U_ID" property="U_id" jdbcType="VARCHAR" />
+    <result column="TIME" property="time" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+    T_ID, G_NAME, TD_START, TD_END, T_PRICE, T_OTHER, T_NOW
+  </sql>
+  <sql id="Order_Base_Column_List" >
+    O_ID, T_ID, E_ID, S_PHONE, R_PHONE, T_PRICE, U_ID, TIME
+  </sql>
+  <select id="searchById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+      <!--parameterType将会传入这条语句的参数类的完全限定名或别名-->
+    select 
+    <include refid="Base_Column_List" />
+    from L_TRANSPORT_BILL
+    where T_ID = #{id,jdbcType=VARCHAR}<!--#{xx}表示取参数中的对象xx的值-->
+  </select>
+  <delete id="DeleteById" parameterType="java.lang.String" >
+    delete from L_TRANSPORT_BILL
+    where T_ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="add" parameterType="com.buyer.model.TransportBill" >
+    insert into L_TRANSPORT_BILL (T_ID, G_NAME, TD_START, TD_END, T_PRICE, T_OTHER, T_NOW)
+    values (#{T_id,jdbcType=VARCHAR}, #{G_name,jdbcType=VARCHAR}, #{Td_start,jdbcType=VARCHAR}, 
+      #{Td_end,jdbcType=VARCHAR}, #{T_price,jdbcType=INTEGER}, #{T_other,jdbcType=VARCHAR}, #{T_now,jdbcType=VARCHAR})
+  </insert>
+  <insert id="addOrderOld" parameterType="com.buyer.model.Order" >
+    insert into T_ORDER (O_ID, T_ID, E_ID, S_PHONE, R_PHONE, T_PRICE, U_ID)
+    values (#{O_id,jdbcType=VARCHAR}, #{T_id,jdbcType=VARCHAR}, #{E_id,jdbcType=VARCHAR}, 
+      #{S_phone,jdbcType=VARCHAR}, #{R_phone,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{U_id,jdbcType=VARCHAR})
+  </insert>
+  <insert id="addOrder" parameterType="com.buyer.model.Order" >
+    insert into T_ORDER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="O_id != null" >
+        O_ID,
+      </if>
+      <if test="T_id != null" >
+        T_ID,
+      </if>
+      <if test="E_id != null" >
+        E_ID,
+      </if>
+      <if test="S_phone != null" >
+        S_PHONE,
+      </if>
+      <if test="R_phone != null" >
+        R_PHONE,
+      </if>
+      <if test="price != null" >
+        T_PRICE,
+      </if>
+      <if test="U_id != null" >
+        U_ID,
+      </if>
+      <if test="time != null" >
+        TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="O_id != null" >
+        #{O_id,jdbcType=VARCHAR},
+      </if>
+      <if test="T_id != null" >
+        #{T_id,jdbcType=VARCHAR},
+      </if>
+      <if test="E_id != null" >
+        #{E_id,jdbcType=VARCHAR},
+      </if>
+      <if test="S_phone != null" >
+        #{S_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="R_phone != null" >
+        #{R_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="U_id != null" >
+        #{U_id,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.buyer.model.TransportBill" >
+    update L_TRANSPORT_BILL
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        AGE = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        SEX = #{address,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="Update" parameterType="com.buyer.model.TransportBill" >
+    update L_TRANSPORT_BILL
+    set T_NOW = #{T_now,jdbcType=VARCHAR}      
+    where T_ID = #{T_id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getAll" resultMap="BaseResultMap">
+	select
+	T_ID, G_NAME, TD_START, TD_END, T_PRICE, T_OTHER, T_NOW
+	from L_TRANSPORT_BILL
+  </select>
+  
+  <select id="searchOrderBySPhone" resultMap="Order_BaseResultMap" parameterType="java.lang.String" >
+      <!--parameterType将会传入这条语句的参数类的完全限定名或别名-->
+    select 
+    <include refid="Order_Base_Column_List" />
+    from T_ORDER
+    where S_PHONE = #{S_phone,jdbcType=VARCHAR}<!--#{xx}表示取参数中的对象xx的值-->
+  </select>
+  
+  <select id="searchOrderByRPhone" resultMap="Order_BaseResultMap" parameterType="java.lang.String" >
+      <!--parameterType将会传入这条语句的参数类的完全限定名或别名-->
+    select 
+    <include refid="Order_Base_Column_List" />
+    from T_ORDER
+    where R_PHONE = #{R_phone,jdbcType=VARCHAR}<!--#{xx}表示取参数中的对象xx的值-->
+  </select>
+  
+  <select id="searchNewOrder" resultMap="Order_BaseResultMap">
+    select 
+    <include refid="Order_Base_Column_List" />
+    from T_ORDER
+    where E_ID is null
+  </select>
+  
+  <select id="searchByEID" resultMap="Order_BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Order_Base_Column_List" />
+    from T_ORDER
+    where E_ID = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="searchByTid" resultMap="Order_BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Order_Base_Column_List" />
+    from T_ORDER
+    where T_ID = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+http://www.springframework.org/schema/mvc 
+http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+   
+    <!-- 注解扫描 -->
+	<context:component-scan base-package="com.buyer.controller" />
+	<!-- 指定需要spring扫描controller下的所有包 -->
+	
+	<!-- mappingJacksonHttpMessageConverter ： 用来处理json格式转换 -->
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 在利用spring的mvc开发过程中，需要将json对象从session中取出来使用。利用了AnnotationMethodHandlerAdapter来解决这个问题 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+    
+    <!-- 根据模板名称和位置解析视图。InternalResourceViewResolver视图解析器的策略是直接映射到模板名称和位置。
+	这个解析器能够支持Redirect前缀（如："redirect:welcome"）。 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+		  p:prefix="/" p:suffix=".jsp" />
+	<!-- prefix:前缀；suffix:后缀 -->
+		  
+	<!--  使用Spring CommonsMultipartResolver 上传文件   -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+		<property name="maxUploadSize">
+			<value>10485760</value><!-- 10M -->
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+
+</beans>

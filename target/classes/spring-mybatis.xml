@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+">
+	<!-- 连接池 druid（阿里巴巴的框架），与dbcp连接池类似 -->
+	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<property name="url" value="${jdbc_url}" />
+		<property name="username" value="${jdbc_username}" />
+		<property name="password" value="${jdbc_password}" />
+	
+		<property name="initialSize" value="0" />		
+		<property name="maxActive" value="20" />	
+		<property name="maxIdle" value="20" />
+		<property name="minIdle" value="0" />		
+		<property name="maxWait" value="60000" />
+		
+		<!-- 给出一条简单的sql语句进行验证 -->
+		<property name="validationQuery" value="${validationQuery}" />
+		<!-- 在取出连接时进行有效验证 -->
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		<property name="testWhileIdle" value="true" />
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<property name="minEvictableIdleTimeMillis" value="25200000" />
+		<!-- 是否自动回收超时连接 -->
+		<property name="removeAbandoned" value="true" />
+		<!-- 设置被遗弃的连接的超时的时间（以秒数为单位），即当一个连接被遗弃的时间超过设置的时间，
+		              则它会自动转换成可利用的连接。默认的超时时间是300秒。 -->
+		<property name="removeAbandonedTimeout" value="1800" />
+		<!-- 是否在自动回收超时连接的时候打印连接的超时错误 -->
+		<property name="logAbandoned" value="true" />
+		<property name="filters" value="mergeStat" />
+	</bean>
+	
+	<!-- http://blog.csdn.net/lemonyfei/article/details/8925325 
+		 在Mybatis中,SqlSessionFactoryBuilder用于创建SqlSessionFactory(SqlSessionFactory类的实例（相当于是产生连接池）)。
+		 而在Mybatis-Spring中SqlSessionFactoryBean将取而代之
+	-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	    <!-- 指向上面的连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 配置mapper文件的路径 -->
+		<property name="mapperLocations" value="classpath:com/buyer/mapping/*.xml" />
+	</bean>
+	
+	<!-- Mybatis MapperScannerConfigurer 自动扫描 将Mapper接口生成代理注入到Spring  -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- basePackage 属性是让你为映射器接口文件设置基本的包路径 -->
+		<property name="basePackage" value="com.buyer.dao" />
+		<!-- 注 意 , 没 有 必 要 去 指 定 SqlSessionFactory 或 SqlSessionTemplate , 因 为 MapperScannerConfigurer 将会创建 MapperFactoryBean,之后自动装配。
+		           但是,如果你使 用了一个 以上的 DataSource ,那 么自动 装配可 能会失效 。这种 情况下 ,你可 以使用 sqlSessionFactoryBeanName 或 sqlSessionTemplateBeanName 属性
+		           来设置正确的 bean 名 称来使用。这就是它如何来配置的,注意 bean 的名称是必须的,而不是 bean 的引用,因 此,value 属性在这里替代通常的 ref: -->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+	
+	<!-- spring的事务管理 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 下面是事务 ：http://jinnianshilongnian.iteye.com/blog/1442376 
+	             http://nannan408.iteye.com/blog/1754882
+	-->
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="append*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="modify*" propagation="REQUIRED" />
+			<tx:method name="edit*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="repair" propagation="REQUIRED" />
+			<tx:method name="delAndRepair" propagation="REQUIRED" />
+
+			<tx:method name="get*" propagation="SUPPORTS" />
+			<tx:method name="find*" propagation="SUPPORTS" />
+			<tx:method name="load*" propagation="SUPPORTS" />
+			<tx:method name="search*" propagation="SUPPORTS" />
+			<tx:method name="datagrid*" propagation="SUPPORTS" />
+
+			<tx:method name="*" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="transactionPointcut" expression="execution(* com.buyer.service..*Impl.*(..))" />
+		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
+	</aop:config>
+
+</beans>

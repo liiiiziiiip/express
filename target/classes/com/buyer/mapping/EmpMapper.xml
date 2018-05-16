@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buyer.dao.EmpMapper" >
+    <!-- 为这个mapper指定唯一的namespace -->
+  <resultMap id="BaseResultMap" type="com.buyer.model.Emp" >
+    <id column="E_ID" property="e_id" jdbcType="VARCHAR" />
+    <result column="ENAME" property="ename" jdbcType="VARCHAR" />
+    <result column="SAL" property="sal" jdbcType="INTEGER" />
+    
+    <result column="R_NAME" property="r_name" jdbcType="VARCHAR" />
+    <result column="AGE" property="age" jdbcType="INTEGER" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap type="String" id="Rpw">
+  	<id column="PW" property="pw" jdbcType="VARCHAR"/>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    E_ID, ENAME, SAL, R_NAME, AGE, SEX
+  </sql>
+  <select id="SelectEmpById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+      <!--parameterType将会传入这条语句的参数类的完全限定名或别名-->
+    select 
+    <include refid="Base_Column_List" />
+    from EMP
+    where E_ID = #{id,jdbcType=VARCHAR}<!--#{xx}表示取参数中的对象xx的值-->
+  </select>
+  <delete id="DeleteById" parameterType="java.lang.String" >
+    delete from EMP
+    where E_ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="Insert" parameterType="com.buyer.model.Emp" >
+    insert into EMP (E_ID, ENAME, R_NAME, AGE, SEX, PW)
+    values (#{e_id,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, #{r_name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{sex,jdbcType=CHAR}, #{pw,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.buyer.model.Emp" >
+    insert into EMP
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="e_id != null" >
+        E_ID,
+      </if>
+      <if test="name != null" >
+        R_NAME,
+      </if>
+      <if test="age != null" >
+        AGE,
+      </if>
+      <if test="address != null" >
+        SEX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="e_id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.buyer.model.Emp" >
+    update EMP
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        AGE = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        SEX = #{address,jdbcType=CHAR},
+      </if>
+    </set>
+    where E_ID = #{e_id,jdbcType=INTEGER}
+  </update>
+  <update id="Update" parameterType="com.buyer.model.Emp" >
+    update EMP
+    set R_NAME = #{r_name,jdbcType=VARCHAR},
+      AGE = #{age,jdbcType=INTEGER},
+      SEX = #{sex,jdbcType=VARCHAR},
+      SAL = #{sal,jdbcType=INTEGER}
+    where E_ID = #{e_id,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="PaySal" parameterType="java.lang.String" >
+    update EMP
+    set 
+      SAL = #{"0",jdbcType=INTEGER}
+    where E_ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getAll" resultMap="BaseResultMap">
+	select E_ID, ENAME, SAL, R_NAME, AGE, SEX from EMP
+  </select>
+  
+  <select id="getPW" resultMap="Rpw" parameterType="java.lang.String">
+	select PW from EMP
+	where ENAME = #{name,jdbcType=VARCHAR}
+  </select>
+</mapper>
