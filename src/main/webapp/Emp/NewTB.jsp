@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</head>
 
 	<body>
-		<form action="<%=path %>/tbController/addTB.do?id=${id}" method="POST">
+		<form action="<%=path %>/tbController/EaddTB.do?id=${id}" method="POST">
 			<table>
 			<tr>
 					<td>发件人姓名:</td>

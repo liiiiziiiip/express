@@ -41,11 +41,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </style> 
 
 <script > 
+var id = "${id}";
 var list = "${tblist}";
+console.log("id:",id);
 console.log("list:",list);
 var jsonObject=eval('('+list+')');
-console.log("jo:",jsonObject);
-console.log("jo.l:",jsonObject.length);
+console.log("jsonOb:",jsonObject);
    
    T = function(){
 	   
@@ -70,8 +71,8 @@ console.log("jo.l:",jsonObject.length);
 	        
 	        console.log("now:",jsonObject[i].T_now);
 	        
-	        tdok.innerHTML="<a href=\"<%=path %>/tbController/verifyTB.do?id=" + jsonObject[i].T_id + "\">确认</a>";
-	        tdno.innerHTML="<a href=\"<%=path %>/tbController/CalcelList.do?id=" + jsonObject[i].T_id + "\">拒绝</a>";
+	        tdok.innerHTML="<a href=\"<%=path %>/tbController/verifyTB.do?t_id=" + jsonObject[i].T_id + "&id="+id +"\">确认</a>";
+	        tdno.innerHTML="<a href=\"<%=path %>/tbController/RejectTB.do?t_id=" + jsonObject[i].T_id + "\">拒绝</a>";
 	    
 	        tr.appendChild(tdid);  
 	        tr.appendChild(tdgname);  

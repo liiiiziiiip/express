@@ -14,7 +14,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body bgcolor="red">
 Here is Head!<br>
 <script>
-console.log("Hid:",id);
+var hid = ${id};
+console.log("Hid:",hid);
 </script>
 </body>
 </html>

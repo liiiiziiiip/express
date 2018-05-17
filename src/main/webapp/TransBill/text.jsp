@@ -7,7 +7,7 @@
 <title>nowDetail</title>
 </head>
 <body>
-<p>test</p>
+<p>物流详情：</p>
 <p>${now}</p>
 <script type="text/javascript">
 var now = ${now};

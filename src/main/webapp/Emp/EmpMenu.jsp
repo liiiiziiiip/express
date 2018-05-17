@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <a href="<%=path %>/tbController/NewtbList.do?id=${id}" target="main">查看新快递</a><br>
 <a href="<%=path %>/tbController/TBofMe.do?id=${id}" target="main">我负责的快递</a><br>
-<a href="<%=path %>/tbController/NewTBUI.do?id=${id}" target="main">添加新快递</a><br>
+<a href="<%=path %>/tbController/NewTBFromEmpUI.do?id=${id}" target="main">添加新快递</a><br>
 <a href="<%=path %>/userController/updateUserUI.do?id=${id}" target="main">更改用户信息</a><br>
 <script>
 var uid = ${id};

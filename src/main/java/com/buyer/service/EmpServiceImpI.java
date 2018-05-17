@@ -61,5 +61,10 @@ public class EmpServiceImpI implements EmpServiceI {
 		// TODO Auto-generated method stub
 		return em.PaySal(id);
 	}
+	@Override
+	public String getId(String name) {
+		// TODO Auto-generated method stub
+		return em.getId(name);
+	}
 
 }

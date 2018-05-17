@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
   	<h3>TBList</h3>
-  	<a href="<%=path %>/AddTB.jsp">Add TB</a><br/>
+  	
 	<table border="1" width="70%" height="100%">
    		<tr>
    			<td>单号</td>
@@ -32,9 +32,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			<td>${tb.td_start }</td>
    			<td>${tb.td_end }</td>
    			<td>${tb.t_other }</td>
-   			<td>${tb.t_now }</td>
+   			<td><a href="<%=path %>/webController/text.do?now=${tb.t_now }">详情</a></td>
    			<td><a href="<%=path %>/userController/deleteEmp.do?id=${tb.t_id }">Delete</a></td>
-   			<td><a href="<%=path %>/userController/updateEmpUI.do?id=${tb.t_id }">Update</a></td>
+   			<td><a href="<%=path %>/tbController/updateTBUI.do?id=${tb.t_id }">Update</a></td>
    			
    		</tr>
    		</c:forEach>

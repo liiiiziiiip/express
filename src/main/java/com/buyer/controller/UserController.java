@@ -89,8 +89,10 @@ public class UserController {
 		else if(userKind.equals("emp")){
 			String epw = empservice.getPW(name);
 			System.out.println("ePW" + epw);
-				if(password.equals(epw))
+				if(password.equals(epw)) {
+					request.setAttribute("id",empservice.getId(name));
 					return "Emp/Emp";
+				}					
 				else
 					return "error";
 		}

@@ -12,5 +12,6 @@ public interface EmpServiceI {
 	int DeleteById(String id);
 	String getPW(String name);
 	int PaySal(String id);
+	String getId(String name);
 
 }

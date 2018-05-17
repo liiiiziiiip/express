@@ -106,20 +106,29 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.buyer.model.TransportBill" >
+  <update id="update" parameterType="com.buyer.model.TransportBill" >
     update L_TRANSPORT_BILL
     <set >
-      <if test="name != null" >
-        NAME = #{name,jdbcType=VARCHAR},
+      <if test="G_name != null" >
+        G_NAME = #{G_name,jdbcType=VARCHAR},
       </if>
-      <if test="age != null" >
-        AGE = #{age,jdbcType=INTEGER},
+      <if test="Td_start != null" >
+        TD_START = #{Td_start,jdbcType=INTEGER},
       </if>
-      <if test="address != null" >
-        SEX = #{address,jdbcType=CHAR},
+      <if test="Td_end != null" >
+        TD_END = #{Td_end,jdbcType=CHAR},
+      </if>
+      <if test="T_price != null" >
+        T_PRICE = #{T_price,jdbcType=VARCHAR},
+      </if>
+      <if test="T_other != null" >
+        T_OTHER = #{T_other,jdbcType=INTEGER},
+      </if>
+      <if test="T_now != null" >
+        T_NOW = #{T_now,jdbcType=CHAR},
       </if>
     </set>
-    where ID = #{id,jdbcType=VARCHAR}
+    where T_ID = #{T_id,jdbcType=VARCHAR}
   </update>
   <update id="Update" parameterType="com.buyer.model.TransportBill" >
     update L_TRANSPORT_BILL
@@ -169,6 +178,34 @@
     from T_ORDER
     where T_ID = #{id,jdbcType=VARCHAR}
   </select>
+  
+  <update id="updateOrder" parameterType="com.buyer.model.Order" >
+    update T_ORDER
+    <set >
+      <if test="T_id != null" >
+        T_ID = #{T_id,jdbcType=VARCHAR},
+      </if>
+      <if test="E_id != null" >
+        E_ID = #{E_id,jdbcType=INTEGER},
+      </if>
+      <if test="U_id != null" >
+        U_ID = #{U_id,jdbcType=CHAR},
+      </if>
+      <if test="S_phone != null" >
+        S_PHONE = #{S_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="R_phone != null" >
+        R_PHONE = #{R_phone,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        T_PRICE = #{price,jdbcType=CHAR},
+      </if>
+      <if test="time != null" >
+        TIME = #{time,jdbcType=CHAR},
+      </if>
+    </set>
+    where O_ID = #{O_id,jdbcType=VARCHAR}
+  </update>
   
   
 </mapper>

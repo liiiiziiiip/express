@@ -12,10 +12,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 success!<br>
-<a href="<%=path %>/login.jsp">login</a>
+
 <script>
-var tb = ${tblist};
-console.log("tb:",tb)
 </script>
 </body>
 </html>

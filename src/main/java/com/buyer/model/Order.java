@@ -7,6 +7,8 @@ public class Order {
 	private String E_id;
 	private String S_phone;
 	private String R_phone;
+	private String S_name;
+	private String R_name;
 	private int price;
 	private String time;
 	
@@ -52,17 +54,31 @@ public class Order {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	@Override
-	public String toString() {
-		return "Order [O_id=" + O_id + ", U_id=" + U_id + ", T_id=" + T_id
-				+ ", E_id=" + E_id + ", S_phone=" + S_phone + ", R_phone="
-				+ R_phone + ", price=" + price + "]";
-	}
+	
 	public String getTime() {
 		return time;
 	}
 	public void setTime(String time) {
 		this.time = time;
+	}
+	public String getS_name() {
+		return S_name;
+	}
+	public void setS_name(String s_name) {
+		S_name = s_name;
+	}
+	public String getR_name() {
+		return R_name;
+	}
+	public void setR_name(String r_name) {
+		R_name = r_name;
+	}
+	@Override
+	public String toString() {
+		return "Order [O_id=" + O_id + ", U_id=" + U_id + ", T_id=" + T_id
+				+ ", E_id=" + E_id + ", S_phone=" + S_phone + ", R_phone="
+				+ R_phone + ", S_name=" + S_name + ", R_name=" + R_name
+				+ ", price=" + price + ", time=" + time + "]";
 	}
 	
 	

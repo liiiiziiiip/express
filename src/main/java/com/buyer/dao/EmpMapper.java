@@ -18,5 +18,7 @@ public interface EmpMapper {
 	List<Emp> getAll();
 	
 	public int PaySal(String id);
+	
+	public String getId(String name);
 
 }

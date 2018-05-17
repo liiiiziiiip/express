@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import com.buyer.service.UserServiceI;
 public class TBController {
 	private TransServiceI tsi;
 	private UserServiceI usi;
+	private static final Logger logger = Logger.getLogger(TBController.class);
 	
 
 	public UserServiceI getUsi() {
@@ -150,7 +152,8 @@ public class TBController {
 		order.setTime(tf.getTime());
 		tsi.addOrder(order);
 //		request.setAttribute("id", id);
-		return "redirect:/tbController/List.do";
+//		return "redirect:/tbController/List.do";
+		return "success";
 	}
 	
 	@RequestMapping(value="CancelList")
@@ -177,24 +180,72 @@ public class TBController {
 	}
 	
 	@RequestMapping(value="verifyTB")
-	public String verifyTB(String id) {
+	public String verifyTB(String t_id,String id) {
 		TimeFormat tf = new TimeFormat();
-		TransportBill tb = tsi.searchById(id);
+		TransportBill tb = tsi.searchById(t_id);
 		String now = tb.getT_now();
-		now = now + tf.getTime() + "确认订单";
+		now = now + tf.getTime() + ":确认订单<br>";
 		tb.setT_now(now);
 		tsi.update(tb);
-		Order order = tsi.searchByTid(id);
+		Order order = tsi.searchByTid(t_id);
 		String time = order.getTime();
-		time = time + tf.getTime() + "确认订单";
-		
+		time = time + tf.getTime() + ":确认订单<br>";
+		order.setE_id(id);
+		tsi.updateOrder(order);
+		logger.info(order);
+		logger.info(tb);
 		
 		return "success";
 	}
 	
-	@RequestMapping(value="TverifyTB")
-	public String TverifyTB(String t_id,String id) {
-		System.out.println("tid:"+t_id+"	id:"+id);
+	@RequestMapping(value="RejectTB")
+	public String RejectTB(String t_id) {
+		TimeFormat tf = new TimeFormat();
+		TransportBill tb = tsi.searchById(t_id);
+		String now = tb.getT_now();
+		now = now + tf.getTime() + ":拒绝订单<br>";
+		tb.setT_now(now);
+		tsi.update(tb);
+		Order order = tsi.searchByTid(t_id);
+		String time = order.getTime();
+		time = time + tf.getTime() + ":拒绝订单<br>";
+		order.setE_id("NULL");
+		tsi.updateOrder(order);
+		logger.info(order);
+		logger.info(tb);
 		return "success";
 	}
+	
+	@RequestMapping(value="updateTBUI")
+	public String updateTBUI(String id,HttpServletRequest request) {
+		TransportBill tb = tsi.searchById(id);
+		request.setAttribute("tb", tb);
+		request.setAttribute("id", id);
+		logger.info(tb);
+		return "TransBill/UpdateTB";
+	}
+	
+	@RequestMapping(value="updateTB")
+	public String updateTB(String e_id,TransportBill tb,String updateNow) {
+		TimeFormat tf = new TimeFormat();
+		String now = tb.getT_now();
+		now = now + tf.getTime() + ":" + updateNow + "<br>";
+		tb.setT_now(now);
+		tsi.update(tb);
+		logger.info(tb);
+		return "success";
+	}
+	
+	@RequestMapping(value="NewTBFromEmpUI")
+	public String NewTBFromEmpUI(String id, HttpServletRequest request) {
+		request.setAttribute("id", id);
+		return "Emp/NewTB";
+	}
+	
+//	@RequestMapping(value="EaddTB")
+//	public String EaddTB(String id,TransportBill tb) {
+//		
+//		
+//		return "success";
+//	}
 }
