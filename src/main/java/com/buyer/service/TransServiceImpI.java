@@ -105,5 +105,10 @@ public class TransServiceImpI implements TransServiceI {
 		// TODO Auto-generated method stub
 		return tbm.searchByTid(id);
 	}
+	@Override
+	public List<Order> getOrderAll() {
+		// TODO Auto-generated method stub
+		return tbm.getOrderAll();
+	}
 
 }

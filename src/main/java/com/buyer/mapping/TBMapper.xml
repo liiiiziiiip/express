@@ -142,6 +142,13 @@
 	from L_TRANSPORT_BILL
   </select>
   
+  <select id="getOrderAll" resultMap="Order_BaseResultMap">
+	select
+	<include refid="Order_Base_Column_List" />
+	from T_ORDER
+  </select>
+  
+  
   <select id="searchOrderBySPhone" resultMap="Order_BaseResultMap" parameterType="java.lang.String" >
       <!--parameterType将会传入这条语句的参数类的完全限定名或别名-->
     select 

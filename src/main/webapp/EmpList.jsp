@@ -13,18 +13,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
   	<h3>EmpList</h3>
-  	<a href="<%=path %>/AddEmp.jsp">Add Emp</a><br/>
+  	<a href="<%=path %>/AddEmp.jsp">添加员工</a><br/>
 	<table border="1" width="70%" height="100%">
    		<tr>
-   			<td>Id</td>
-   			<td>RName</td>
-   			<td>EName</td>
-   			<td>Age</td>
-   			<td>sex</td>
-   			<td>SAL</td>
-   			<td>Delete</td>
-   			<td>Update</td>
-   			<td>ResetPW</td>
+   			<td>编号</td>
+   			<td>姓名</td>
+   			<td>用户名</td>
+   			<td>年龄</td>
+   			<td>性别</td>
+   			<td>提成</td>
+   			<td>删除</td>
+   			<td>更新</td>
+   			<td>重置密码</td>
    		</tr>
    		<c:forEach items="${Emplist}" var="emp">
    		<tr>
@@ -34,10 +34,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			<td>${emp.age }</td>
    			<td>${emp.sex }</td>
    			<td>${emp.sal }</td>
-   			<td><a href="<%=path %>/userController/deleteEmp.do?id=${emp.e_id }">Delete</a></td>
-   			<td><a href="<%=path %>/userController/updateEmpUI.do?id=${emp.e_id }">Update</a></td>
-   			<td><a href="<%=path %>/userController/resetpw.do?id=${emp.e_id }">ResetPW</a></td>
-   			<td><a href="<%=path %>/userController/paysal.do?id=${emp.e_id }">PaySal</a></td>
+   			<td><a href="<%=path %>/userController/deleteEmp.do?id=${emp.e_id }">删除</a></td>
+   			<td><a href="<%=path %>/userController/updateEmpUI.do?id=${emp.e_id }">更新</a></td>
+   			<td><a href="<%=path %>/userController/resetpw.do?id=${emp.e_id }">重置密码</a></td>
+   			<td><a href="<%=path %>/userController/paysal.do?id=${emp.e_id }">打钱</a></td>
    		</tr>
    		</c:forEach>
    </table>

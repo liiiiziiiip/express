@@ -13,24 +13,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
   	<h3>List</h3>
-  	<a href="<%=path %>/addUser.jsp">Add User</a><br/>
+  	<a href="<%=path %>/addUser.jsp">添加用户</a><br/>
 	<table border="1" width="70%">
    		<tr>
-   			<td>Id</td>
-   			<td>Name</td>
-   			<td>Age</td>
-   			<td>sex</td>
-   			<td>Delete</td>
-   			<td>Update</td>
+   			<td>编号</td>
+   			<td>姓名</td>
+   			<td>用户名</td>
+   			<td>电话</td>
+   			<td>地址</td>
+   			<td>删除</td>
+   			<td>更新</td>
    		</tr>
    		<c:forEach items="${userlist}" var="user">
    		<tr>
    			<td>${user.id }</td>
    			<td>${user.name }</td>
-   			<td>${user.age }</td>
-   			<td>${user.sex }</td>
-   			<td><a href="<%=path %>/userController/deleteUser.do?id=${user.id }">Delete</a></td>
-   			<td><a href="<%=path %>/userController/updateUserUI.do?id=${user.id }">Update</a></td>
+   			<td>${user.uname }</td>
+   			<td>${user.phone }</td>
+   			<td>${user.address }</td>
+   			<td><a href="<%=path %>/userController/deleteUser.do?id=${user.id }">删除</a></td>
+   			<td><a href="<%=path %>/userController/updateUserUI.do?id=${user.id }">更新</a></td>
    		</tr>
    		</c:forEach>
    </table>

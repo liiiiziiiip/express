@@ -65,7 +65,8 @@ public class TBController {
 		order.setU_id(id);
 		order.setR_phone(tb.getR_phone());
 		order.setS_phone(usi.SelectUserById(id).getPhone());
-		
+		order.setS_name(tb.getS_name());
+		order.setR_name(tb.getR_name());
 		order.setTime(tf.getTime());
 		tsi.addOrder(order);
 //		request.setAttribute("id", id);
@@ -148,7 +149,8 @@ public class TBController {
 		order.setE_id(id);
 		order.setR_phone(tb.getR_phone());
 		order.setS_phone(tb.getS_phone());
-		
+		order.setS_name(tb.getS_name());
+		order.setR_name(tb.getR_name());
 		order.setTime(tf.getTime());
 		tsi.addOrder(order);
 //		request.setAttribute("id", id);
@@ -242,10 +244,18 @@ public class TBController {
 		return "Emp/NewTB";
 	}
 	
-//	@RequestMapping(value="EaddTB")
-//	public String EaddTB(String id,TransportBill tb) {
-//		
-//		
-//		return "success";
-//	}
+	@RequestMapping(value="orderList")
+	public String orderList(HttpServletRequest request) {
+		List<Order> order = tsi.getOrderAll();
+		request.setAttribute("OList", order);
+		
+		return "TransBill/OrderList";
+	}
+	
+	@RequestMapping(value="TBDetail")
+	public String TBDetail(String id,HttpServletRequest request) {
+		TransportBill tb = tsi.searchById(id);
+		request.setAttribute("tb", tb);		
+		return "TransBill/transBill";
+	}
 }

@@ -14,6 +14,7 @@ public interface TransServiceI {
 	List<TransportBill> searchBySPhone(String phone);
 	List<Order> searchByEID(String id);
 	List<Order> searchNewOrder();
+	List<Order> getOrderAll();
 	Order searchByTid(String id);
 //	List<TransportBill> searchNewTB(String id);
 	int update(TransportBill tb);

@@ -12,29 +12,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>TBlist</title>
 </head>
 <body>
-  	<h3>TBList</h3>
-  	<a href="<%=path %>/AddTB.jsp">Add TB</a><br/>
+  	<h3>OrderList</h3>
 	<table border="1" width="70%" height="100%">
    		<tr>
-   			<td>单号</td>
-   			<td>货物名称</td>
-   			<td>始发地</td>
-   			<td>目的地</td>
-   			<td>备注</td>
-   			<td>详情</td>
-   			<td>Delete</td>
-   			<td>Update</td>
+   			<td>订单号</td>
+   			<td>物流单号</td>
+   			<td>用户编号</td>
+   			<td>员工编号</td>
+   			<td>发件人电话</td>
+   			<td>收件人电话</td>
+   			<td>时间</td>
+   			<td>发件人</td>
+   			<td>收件人</td>
+   			<td>详单</td>
    		</tr>
-   		<c:forEach items="${tblist}" var="tb">
+   		<c:forEach items="${OList}" var="ol">
    		<tr>
-   			<td>${tb.t_id}</td>
-   			<td>${tb.g_name }</td>
-   			<td>${tb.td_start }</td>
-   			<td>${tb.td_end }</td>
-   			<td>${tb.t_other }</td>
-   			<td>${tb.t_now }</td>
-   			<td><a href="<%=path %>/userController/deleteEmp.do?id=${tb.t_id }">Delete</a></td>
-   			<td><a href="<%=path %>/userController/updateEmpUI.do?id=${tb.t_id }">Update</a></td>
+   			<td>${ol.o_id}</td>
+   			<td>${ol.t_id }</td>
+   			<td>${ol.e_id }</td>
+   			<td>${ol.u_id }</td>
+   			<td>${ol.s_phone }</td>
+   			<td>${ol.r_phone }</td>
+   			<td>${ol.time }</td>
+   			<td>${ol.s_name }</td>
+   			<td>${ol.r_name }</td>
+   			<td><a href="<%=path %>/tbController/TBDetail.do?id=${ol.t_id }">详单</a></td>
    			
    		</tr>
    		</c:forEach>

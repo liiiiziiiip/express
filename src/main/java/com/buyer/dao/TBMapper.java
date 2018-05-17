@@ -17,6 +17,7 @@ public interface TBMapper {
 	public List<Order> searchOrderByRPhone(String phone);
 	public List<Order> searchNewOrder();
 	public List<Order> searchByEID(String id);
+	public List<Order> getOrderAll();
 	Order searchByTid(String id);
 	public int updateOrder(Order order);
 //	public String updateNow(String now);

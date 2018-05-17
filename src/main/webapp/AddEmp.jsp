@@ -13,31 +13,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<form action="<%=path %>/userController/addEmp.do" method="POST">
 			<table>
 				<tr>
-					<td>username:</td>
+					<td>用户名:</td>
 					<td><input type="text" name="ename"></td>
 				</tr>
 				<tr>
-					<td>password:</td>
+					<td>密码:</td>
 					<td><input type="text" name="pw"></td>
 				</tr>
 				<tr>
-					<td>realname:</td>
+					<td>姓名:</td>
 					<td><input type="text" name="r_name"></td>
 				</tr>
 				<tr>
-					<td>age:</td>
+					<td>年纪:</td>
 					<td><input type="text" name="age"></td>
 				</tr>
 				<tr>
-					<td>sex:</td>
+					<td>性别:</td>
 					<td><input type="text" name="sex"></td>
 				</tr>
 				<tr>
 					<td>
-						<input type="submit" value="Save">
+						<input type="submit" value="提交">
 					</td>
 					<td>
-						<input type="reset" value="Reset">
+						<input type="reset" value="重置">
 					</td>
 				</tr>
 			</table>
