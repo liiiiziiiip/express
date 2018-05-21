@@ -7,9 +7,29 @@
   	<id column="PASSWORD" property="pw" jdbcType="VARCHAR"/>
   </resultMap>
   
+  <resultMap type="com.buyer.model.Text" id="text">
+  	<id column="NAME" property="name" jdbcType="VARCHAR"/>
+  	<id column="TEXT" property="text" jdbcType="VARCHAR"/>
+  </resultMap>
+  
  
   <select id="getPW" resultMap="Rpw" parameterType="java.lang.String">
 	select PASSWORD from ADMIN
 	where NAME = #{name,jdbcType=VARCHAR}
   </select>
+  
+  <select id="getText" resultMap="text">
+	select NAME,TEXT from TEXT
+  </select>
+  
+  <insert id="addText" parameterType="com.buyer.model.Text" >
+    insert into TEXT (ID, NAME, TEXT)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR})
+  </insert>
+    
+  <delete id="deleteTById" parameterType="java.lang.String" >
+    delete from TEXT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  
 </mapper>

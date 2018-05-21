@@ -14,6 +14,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <a href="<%=path %>/userController/Emplist.do" target="main">员工列表</a><br>
 <a href="<%=path %>/userController/list.do" target="main">用户列表</a><br>
 <a href="<%=path %>/tbController/orderList.do" target="main">订单列表</a><br>
-<a href="" target="main">TBList</a><br>
+<a href="<%=path %>/webController/textUI.do" target="main">公告管理</a><br>
 </body>
 </html>

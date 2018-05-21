@@ -1,6 +1,7 @@
 package com.buyer.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,9 +35,18 @@ public class EmpServiceImpI implements EmpServiceI {
 	}
 
 	@Override
-	public int Insert(Emp emp) {
+	public boolean Insert(Emp emp) {
 		// TODO Auto-generated method stub
-		return em.Insert(emp);
+		String id = UUID.randomUUID().toString();
+		id = id.replace("-","");
+		emp.setE_id(id);
+		if (em.getPW(emp.getEname()) != null) {
+			return false;
+		}
+		else {
+			em.Insert(emp);
+			return true;
+		}
 	}
 
 	@Override

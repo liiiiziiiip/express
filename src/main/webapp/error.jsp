@@ -8,6 +8,7 @@
 </head>
 <body>
 error!<br>
-<a href="login.jsp">login</a>
+用户名重复或其输入非法<br>
+<a href="index.jsp">主页</a>
 </body>
 </html>

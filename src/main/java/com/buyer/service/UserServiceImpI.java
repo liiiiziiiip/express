@@ -1,6 +1,7 @@
 package com.buyer.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,9 @@ public class UserServiceImpI implements UserServiceI{
 
 	public int Insert(TUser user) {
 		// TODO Auto-generated method stub
+		String id = UUID.randomUUID().toString();
+		id = id.replace("-","");
+		user.setId(id);
 		return userM.Insert(user);
 	}
 

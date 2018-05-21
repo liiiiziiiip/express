@@ -92,8 +92,8 @@ console.log("jsonOb:",jsonObject);
 </head>
 <body>
 
-  	<h3>TBList</h3>
-  	<a href="<%=path %>/AddTB.jsp">Add TB</a><br/>
+  	<h3>快递列表</h3>
+  	
 	<table border="1" width="70%" height="100%">
 	<thead>
    		<tr>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.buyer.dao.TBMapper;
 import com.buyer.model.Order;
+import com.buyer.model.TimeFormat;
 import com.buyer.model.TransportBill;
 
 @Service("transService")

@@ -29,24 +29,24 @@ public class TestMybatis {
 		this.muserService = muserService;
 	}
 	
-	@Test
-	public void test1() {
-		
-		List<User> list = muserService.getAll();
-		logger.info(JSON.toJSONStringWithDateFormat(list, "yyyy-MM-dd HH:mm:ss"));
-	}
+//	@Test
+//	public void test1() {
+//		
+//		List<User> list = muserService.getAll();
+//		logger.info(JSON.toJSONStringWithDateFormat(list, "yyyy-MM-dd HH:mm:ss"));
+//	}
 	
 	//@Test
-	public void test2() {
-	
-		User muser = new User();
-		muser.setId("0");
-		muser.setName("aaaa");
-		muser.setName("12");
-		muser.setPw("m");
-		int i = muserService.Insert(muser);
-		logger.info(JSON.toJSONStringWithDateFormat("add "+i, "yyyy-MM-dd HH:mm:ss"));
-	}
+//	public void test2() {
+//	
+//		User muser = new User();
+//		muser.setId("0");
+//		muser.setName("aaaa");
+//		muser.setName("12");
+//		muser.setPw("m");
+//		int i = muserService.Insert(muser);
+//		logger.info(JSON.toJSONStringWithDateFormat("add "+i, "yyyy-MM-dd HH:mm:ss"));
+//	}
 	
 //	//@Test
 //	public void test3() {

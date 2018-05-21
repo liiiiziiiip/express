@@ -8,9 +8,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="css/Style.css">
 <title>login</title>
 </head>
 <body>
+<div id="login">
+<div id="form">
 <form name="input" action="<%=path %>/userController/login-check.do" method="post">
 	<div class="input-item">
 		<input id="name" name="name" tabindex="1" placeholder="请输入用户名"  type="text" value="" size="25">
@@ -19,10 +22,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<input id="password" name="password" tabindex="2" placeholder="请输入密码" accesskey="p" type="password" value="" size="25" autocomplete="off">
 	</div>
 	<a>用户类型</a><br>
-	<input type="radio" name="userKind" value="user">User<br>
-	<input type="radio" name="userKind" value="emp">Emp<br>
-	<input type="radio" name="userKind" value="admin">Admin<br>
+	<input type="radio" name="userKind" value="user">	用户<br>
+	<input type="radio" name="userKind" value="emp">	员工<br>
+	<input type="radio" name="userKind" value="admin">管理员<br>
 <input type="submit" name="submit">
+</div>
+</div>
 </form> 
 
 </body>

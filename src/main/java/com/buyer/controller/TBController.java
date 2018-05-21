@@ -87,7 +87,7 @@ public class TBController {
 		TUser user = usi.SelectUserById(id);
 		List<TransportBill> tb = tsi.searchByRPhone(user.getPhone());
 		request.setAttribute("tblist", tb);
-		return "TransBill/List";
+		return "TransBill/UList";
 //		return "success";
 	}
 	
@@ -96,7 +96,7 @@ public class TBController {
 		TUser user = usi.SelectUserById(id);
 		List<TransportBill> tb = tsi.searchBySPhone(user.getPhone());
 		request.setAttribute("tblist", tb);
-		return "TransBill/List";
+		return "TransBill/UList";
 //		return "success";
 	}
 	
@@ -257,5 +257,15 @@ public class TBController {
 		TransportBill tb = tsi.searchById(id);
 		request.setAttribute("tb", tb);		
 		return "TransBill/transBill";
+	}
+	
+	@RequestMapping(value="delete")
+	public String delete(String id) {
+		Order order = tsi.searchByTid(id);
+		TimeFormat tf = new TimeFormat();
+		String time = order.getTime();
+		time = time + tf + ":" + "删除详单<br>";
+		order.setTime(time);	
+		return "success";
 	}
 }

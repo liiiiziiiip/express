@@ -4,10 +4,6 @@ import java.util.List;
 
 
 
-
-
-
-
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,8 +13,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alibaba.fastjson.JSON;
 import com.buyer.model.Order;
+import com.buyer.model.Text;
 import com.buyer.model.TimeFormat;
 import com.buyer.model.TransportBill;
+import com.buyer.service.AdminServiceI;
 import com.buyer.service.EmpServiceI;
 import com.buyer.service.SearchServiceI;
 import com.buyer.service.TransServiceI;
@@ -34,7 +32,13 @@ public class servicetest {
 	private EmpServiceI empservice;
 	private TransServiceI ts;
 	private UserServiceI ui;
+	private AdminServiceI asi;
 	
+	@Autowired
+	public void setAsi(AdminServiceI asi) {
+		this.asi = asi;
+	}
+	@Autowired
 	public void setUi(UserServiceI ui) {
 		this.ui = ui;
 	}
@@ -103,41 +107,12 @@ public class servicetest {
 		String userKind = ui.userKind("123");
 		logger.info(JSON.toJSONStringWithDateFormat(userKind, "yyyy-MM-dd HH:mm:ss"));
 	}
-	//@Test
-//	public void test2() {
-//	
-//		User muser = new User();
-//		muser.setId(0);
-//		muser.setName("aaaa");
-//		muser.setAge(12);
-//		muser.setSex("m");
-//		int i = searchService.Insert(muser);
-//		logger.info(JSON.toJSONStringWithDateFormat("add "+i, "yyyy-MM-dd HH:mm:ss"));
-//	}
-//	
-//	//@Test
-//	public void test3() {
-//		
-//		User muser = new User();
-//		muser.setId(0);
-//		muser.setName("bbbb");
-//		muser.setAge(12);
-//		muser.setSex("f");
-//		int i = muserService.Update(muser);
-//		logger.info(JSON.toJSONStringWithDateFormat("update " +i, "yyyy-MM-dd HH:mm:ss"));
-//	}
-//	
-//	//@Test
-//	public void test4() {
-//		
-//		User muser = new User();
-//		muser.setId(0);
-//		muser.setName("bbbb");
-//		muser.setAge(134);
-//		muser.setSex("m");
-//		int i = muserService.DeletById(0);
-//		logger.info(JSON.toJSONStringWithDateFormat("delete "+i, "yyyy-MM-dd HH:mm:ss"));
-//	}
-
+	
+	
+	@Test
+	public void text() {
+		List<Text> text = asi.getText();
+		logger.info(text);
+	}
 	
 }

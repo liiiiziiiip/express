@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>Admin</title>
 </head>
 <body>
-<iframe name="head" align="top" height="15%" width="100%" frameborder="0" src="<%=path %>/Head.jsp">head</iframe>
+<iframe name="head" align="top" height="15%" width="100%" frameborder="0" src="<%=path %>/webController/Head.do?id=${id}">head</iframe>
 <iframe name="menu" align="left" height="500" width="20%" frameborder="0" src="<%=path %>/AdminMenu.jsp"></iframe>
 <iframe name="main" align="right" height="500" width="80%" frameborder="0" src="<%=path %>/userController/Emplist.do"></iframe>
 </body>

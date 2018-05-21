@@ -4,14 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>nowDetail</title>
+<title>Insert title here</title>
 </head>
 <body>
-<p>物流详情</p>
-<p>${now}</p>
-<script type="text/javascript">
-var now = ${now};
-console.log("now:",now);
-</script>
+<img alt="welcom" src="welcom.webp">
 </body>
 </html>

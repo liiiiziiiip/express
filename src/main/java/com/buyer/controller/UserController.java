@@ -109,18 +109,20 @@ public class UserController {
 	
 	@RequestMapping(value="/addEmp")
 	public String addUser(Emp emp) {
-		String id = UUID.randomUUID().toString();
-		id = id.replace("-","");
-		emp.setE_id(id);
-		empservice.Insert(emp);
-		return "redirect:/userController/Emplist.do";
+//		String id = UUID.randomUUID().toString();
+//		id = id.replace("-","");
+//		emp.setE_id(id);
+		if (empservice.Insert(emp))
+			return "redirect:/userController/Emplist.do";
+		else 
+			return "error";
 	}
 	
 	@RequestMapping(value="/addUser")
 	public String addUser(TUser user) {
-		String id = UUID.randomUUID().toString();
-		id = id.replace("-","");
-		user.setId(id);
+//		String id = UUID.randomUUID().toString();
+//		id = id.replace("-","");
+//		user.setId(id);
 		userservice.Insert(user);
 		return "success";
 	}

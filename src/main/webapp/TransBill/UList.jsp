@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>TBlist</title>
 </head>
 <body>
-  	<h3>TBList</h3>
+  	<h3>快递列表</h3>
   	
 	<table border="1" width="70%" height="100%">
    		<tr>
@@ -22,8 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			<td>目的地</td>
    			<td>备注</td>
    			<td>详情</td>
-   			<td>Delete</td>
-   			<td>Update</td>
+   			
    		</tr>
    		<c:forEach items="${tblist}" var="tb">
    		<tr>
@@ -33,8 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			<td>${tb.td_end }</td>
    			<td>${tb.t_other }</td>
    			<td><a href="<%=path %>/webController/text.do?now=${tb.t_now }">详情</a></td>
-   			<td><a href="<%=path %>/userController/delete.do?id=${tb.t_id }">删除</a></td>
-   			<td><a href="<%=path %>/tbController/updateTBUI.do?id=${tb.t_id }">更新</a></td>
+   			
    			
    		</tr>
    		</c:forEach>
